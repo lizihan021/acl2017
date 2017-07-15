@@ -283,7 +283,7 @@ class models(object):
 
         start_time = time.time()
         evaluate_all(self, words)
-
+        '''
         counter = 0
         try:
             for eidx in xrange(params.epochs):
@@ -340,6 +340,7 @@ class models(object):
 
         except KeyboardInterrupt:
             print "Training interupted"
+        '''
 
         end_time = time.time()
         print "total time:", (end_time - start_time)
