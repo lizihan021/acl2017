@@ -76,26 +76,7 @@ params.evaluate = str2bool(params.evaluate)
 params.outgate = str2bool(params.outgate)
 params.learner = str2learner(params.learner)
 
-data = []
 
-f1 = '../data/simple.aligned'
-f2 = '../data/normal.aligned'
-
-d1 = get_lines(f1)
-d2 = get_lines(f2)
-
-for i in range(len(d1)):
-    data.append((d1[i],d2[i]))
-data = get_data(data)
-
-lengths = []
-for i in data:
-    lengths.append(len(i[0].phrase.split()))
-    lengths.append(len(i[1].phrase.split()))
-
-if params.max > 0:
-    random.shuffle(data)
-    data = data[0:params.max]
 
 if params.mode == "ppdb":
     d = utils.get_data("../data/ppdb-XL-ordered-data.txt")
@@ -115,6 +96,25 @@ if params.mode == "ppdb":
         ct2 += v
         idx += 1
     print ct2
+    
+else:
+    data = []
+
+    d1 = get_lines('../data/simple.aligned')
+    d2 = get_lines('../data/normal.aligned')
+
+    for i in range(len(d1)):
+        data.append((d1[i],d2[i]))
+    data = get_data(data)
+
+    lengths = []
+    for i in data:
+        lengths.append(len(i[0].phrase.split()))
+        lengths.append(len(i[1].phrase.split()))
+
+    if params.max > 0:
+        random.shuffle(data)
+        data = data[0:params.max]
 
 if params.wordfile:
     (words, We) = utils.get_wordmap(params.wordfile)
